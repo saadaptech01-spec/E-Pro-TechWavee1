@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | TechWave</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="services-style.css">
+</head>
+
+<body>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="glow-bg"></div>
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="top-bar">
+    <div class="container-fluid px-4">
+      <div class="top-bar-inner">
+        <div class="top-bar-left">
+          <span><i class="fas fa-shipping-fast me-1"></i> Free shipping on orders $100+</span>
+          <span class="top-bar-divider">|</span>
+          <span><i class="fas fa-headset me-1"></i> 24/7 Support</span>
+        </div>
+        <div class="top-bar-right">
+          <span class="top-bar-timer">
+            <i class="fas fa-bolt me-1"></i> Flash Sale ends in:
+            <strong id="countdownTimer">00:00:00</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="glow-bg"></div>
+
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNavbar">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+            <img src="logo and bg imagies/t7kWXK7Wj.jpg" alt="TechWave Logo" class="navbar-logo me-2">
+            TECH<span class="brand-wave">WAVE</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto nav-spacing">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-2"></i>Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html"><i class="fas fa-cube me-2"></i>Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-2"></i>About</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-2"></i>Contact</a></li>
+                <li class="nav-item"><a class="nav-link active" href="services.html"><i class="fas fa-cogs me-2"></i>Services</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2 flex-wrap navbar-right-section">
+                <form class="d-flex search-form-enhanced position-relative" id="searchForm" 
+      onsubmit="return false;" action="javascript:void(0);">
+    <div class="search-wrapper-enhanced">
+        <input class="form-control search-input-enhanced" type="search" 
+               id="searchInput" placeholder="Search products..." 
+               aria-label="Search" autocomplete="off">
+        <div class="search-suggestions" id="searchSuggestions" 
+             style="display:none;"></div>
+        <button class="btn btn-search-enhanced" type="button">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
+
+                <div class="nav-icons-group">
+                    <button class="btn btn-primary profile-nav-btn" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom border-secondary">
+        <h5 class="modal-title" id="profileModalLabel"><i class="fas fa-user-circle me-2"></i>My Account</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <ul class="nav nav-tabs nav-tabs-custom justify-content-center" id="profileTabs" role="tablist">
+          <li class="nav-item" role="presentation" id="loginTabItem">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab"
+                    data-bs-target="#loginPane" type="button" role="tab" aria-selected="true">
+              <i class="fas fa-sign-in-alt me-2"></i>Login
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" id="profileDataTabItem" style="display:none;">
+            <button class="nav-link" id="profile-data-tab" data-bs-toggle="tab"
+                    data-bs-target="#profilePane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-user me-2"></i>Profile
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cart-tab" data-bs-toggle="tab"
+                    data-bs-target="#cartPane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-shopping-cart me-2"></i>Cart <span id="cartTabCount"></span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="wishlist-tab" data-bs-toggle="tab"
+                    data-bs-target="#wishlistPane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-heart me-2"></i>Wishlist <span id="wishlistTabCount"></span>
+            </button>
+          </li>
+        </ul>
+        
+        <div class="tab-content" id="profileTabContent">
+          <div class="tab-pane fade show active" id="loginPane" role="tabpanel">
+            <div class="auth-container">
+              <div class="auth-forms-wrapper">
+                
+                <div class="auth-form-container" id="loginFormContainer">
+                  <div class="auth-header">
+                    <div class="auth-icon">
+                      <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Welcome Back!</h3>
+                    <p>Sign in to continue to TechWave</p>
+                  </div>
+
+                  <div class="social-login">
+                    <button type="button" class="btn-social btn-google" onclick="socialLogin('google')">
+                      <i class="fab fa-google"></i>
+                      <span>Google</span>
+                    </button>
+                    <button type="button" class="btn-social btn-facebook" onclick="socialLogin('facebook')">
+                      <i class="fab fa-facebook-f"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button type="button" class="btn-social btn-apple" onclick="socialLogin('apple')">
+                      <i class="fab fa-apple"></i>
+                      <span>Apple</span>
+                    </button>
+                  </div>
+
+                  <div class="auth-divider">
+                    <span>or continue with email</span>
+                  </div>
+
+                  <form id="loginForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="loginEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="loginEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="loginPassword"
+                               placeholder="Password" required minlength="4" autocomplete="current-password">
+                        <label for="loginPassword">Password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('loginPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Password is required.</div>
+                    </div>
+
+                    <div class="auth-options">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Remember me</span>
+                      </label>
+                      <a href="#" class="forgot-link" onclick="showForgotPassword();return false;">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Sign In</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-arrow-right btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Don't have an account? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('signup');return false;">
+                        Create one <i class="fas fa-arrow-right ms-1"></i>
+                      </a>
+                    </p>
+                  </div>
+
+                  <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Protected by 256-bit SSL encryption</span>
+                  </div>
+                </div>
+
+                <div class="auth-form-container" id="signupFormContainer" style="display:none;">
+                  <div class="auth-header">
+                    <div class="auth-icon signup-icon">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Create Account</h3>
+                    <p>Join TechWave and start shopping</p>
+                  </div>
+
+                  <div class="social-login">
+                    <button type="button" class="btn-social btn-google" onclick="socialLogin('google')">
+                      <i class="fab fa-google"></i>
+                      <span>Google</span>
+                    </button>
+                    <button type="button" class="btn-social btn-facebook" onclick="socialLogin('facebook')">
+                      <i class="fab fa-facebook-f"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button type="button" class="btn-social btn-apple" onclick="socialLogin('apple')">
+                      <i class="fab fa-apple"></i>
+                      <span>Apple</span>
+                    </button>
+                  </div>
+
+                  <div class="auth-divider">
+                    <span>or register with email</span>
+                  </div>
+
+                  <form id="signupForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" class="form-control auth-input" id="signupName"
+                               placeholder="Full name" required minlength="2" autocomplete="name">
+                        <label for="signupName">Full name</label>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback">Name must be at least 2 characters.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="signupEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="signupEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="signupPassword"
+                               placeholder="Password" required minlength="6" autocomplete="new-password">
+                        <label for="signupPassword">Password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('signupPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="password-strength-container" id="passwordStrengthContainer">
+                        <div class="password-strength-bar">
+                          <div class="password-strength-fill" id="passwordStrengthFill"></div>
+                        </div>
+                        <div class="password-strength-text">
+                          <span id="passwordStrengthText">Password strength</span>
+                          <span id="passwordStrengthLabel"></span>
+                        </div>
+                        <div class="password-requirements">
+                          <div class="requirement" id="req-length">
+                            <i class="fas fa-circle"></i> At least 6 characters
+                          </div>
+                          <div class="requirement" id="req-upper">
+                            <i class="fas fa-circle"></i> One uppercase letter
+                          </div>
+                          <div class="requirement" id="req-number">
+                            <i class="fas fa-circle"></i> One number
+                          </div>
+                          <div class="requirement" id="req-special">
+                            <i class="fas fa-circle"></i> One special character
+                          </div>
+                        </div>
+                      </div>
+                      <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="signupConfirmPassword"
+                               placeholder="Confirm password" required autocomplete="new-password">
+                        <label for="signupConfirmPassword">Confirm password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('signupConfirmPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback" id="confirmPasswordFeedback">Passwords do not match.</div>
+                    </div>
+
+                    <div class="auth-options">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">I agree to the <a href="#" onclick="showToast('Terms page coming soon!','info');return false;">Terms of Service</a> and <a href="#" onclick="showToast('Privacy page coming soon!','info');return false;">Privacy Policy</a></span>
+                      </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Create Account</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-arrow-right btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Already have an account? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('login');return false;">
+                        Sign in <i class="fas fa-arrow-right ms-1"></i>
+                      </a>
+                    </p>
+                  </div>
+
+                  <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your data is protected & secure</span>
+                  </div>
+                </div>
+
+                <div class="auth-form-container" id="forgotPasswordContainer" style="display:none;">
+                  <div class="auth-header">
+                    <div class="auth-icon forgot-icon">
+                      <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Forgot Password?</h3>
+                    <p>No worries! Enter your email and we'll send you reset instructions.</p>
+                  </div>
+
+                  <form id="forgotPasswordForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="forgotEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="forgotEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Send Reset Link</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-paper-plane btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Remember your password? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('login');return false;">
+                        <i class="fas fa-arrow-left me-1"></i> Back to login
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="profilePane" role="tabpanel">
+            <div id="profileInfo" class="p-4">
+              <p class="text-secondary text-center py-4">Please login to view your profile.</p>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="cartPane" role="tabpanel">
+            <div class="p-4">
+              <div id="cartContent">
+                <div class="empty-state">
+                  <div class="empty-state-icon"><i class="fas fa-shopping-cart"></i></div>
+                  <h5>Your cart is empty</h5>
+                  <p>Browse products and add items!</p>
+                </div>
+              </div>
+              <div id="cartTotal" style="display:none;" class="mt-3 pt-3 border-top border-secondary">
+                <div class="checkout-summary">
+                  <div class="checkout-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+                  <div class="checkout-row"><span>Shipping</span><span id="cartShipping">Free</span></div>
+                  <div class="checkout-row"><span>Tax (8%)</span><span id="cartTax">$0.00</span></div>
+                  <div class="checkout-row total"><span>Total</span><span class="checkout-val" id="cartTotalAmount">$0.00</span></div>
+                </div>
+                <button class="btn btn-primary w-100 mb-2" id="checkoutBtn" onclick="processCheckout()">
+                  <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                </button>
+                <button class="btn btn-outline-danger w-100 btn-sm" onclick="clearCart()">
+                  <i class="fas fa-trash-alt me-2"></i>Clear Cart
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="wishlistPane" role="tabpanel">
+            <div class="p-4">
+              <div id="wishlistContent">
+                <div class="empty-state">
+                  <div class="empty-state-icon"><i class="fas fa-heart"></i></div>
+                  <h5>Your wishlist is empty</h5>
+                  <p>Click the ♥ on products you love!</p>
+                </div>
+              </div>
+              <div id="wishlistActions" style="display:none;" class="mt-3 pt-3 border-top border-secondary">
+                <button class="btn btn-primary w-100 mb-2" onclick="addAllWishlistToCart()">
+                  <i class="fas fa-cart-plus me-2"></i>Add All to Cart
+                </button>
+                <button class="btn btn-outline-danger w-100 btn-sm" onclick="clearWishlist()">
+                  <i class="fas fa-trash-alt me-2"></i>Clear Wishlist
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <header class="services-hero">
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <span class="hero-badge"><i class="fas fa-sparkles me-2"></i>World-Class Services</span>
+          <h1 class="display-3 fw-bold mb-3">Our Premium Services</h1>
+          <p class="lead">Exceptional customer support and services that exceed expectations. We don't just sell
+            products — we deliver complete experiences.</p>
+          <div class="hero-cta-group mt-4">
+            <a href="#services-main" class="btn btn-primary btn-lg me-3"><i class="fas fa-arrow-down me-2"></i>Explore
+              Services</a>
+            <a href="#faq-section" class="btn btn-outline-light btn-lg"><i class="fas fa-question-circle me-2"></i>View
+              FAQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <section class="stats-section py-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6 col-6">
+            <div class="stat-card text-center">
+              <div class="stat-icon-wrapper">
+                <i class="fas fa-users"></i>
+              </div>
+              <h2 class="stat-number" data-target="150000">0</h2>
+              <p class="stat-label">Happy Customers</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-6">
+            <div class="stat-card text-center">
+              <div class="stat-icon-wrapper">
+                <i class="fas fa-box-open"></i>
+              </div>
+              <h2 class="stat-number" data-target="50000">0</h2>
+              <p class="stat-label">Products Delivered</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-6">
+            <div class="stat-card text-center">
+              <div class="stat-icon-wrapper">
+                <i class="fas fa-headset"></i>
+              </div>
+              <h2 class="stat-number" data-target="99">0</h2>
+              <p class="stat-label">Satisfaction Rate %</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-6">
+            <div class="stat-card text-center">
+              <div class="stat-icon-wrapper">
+                <i class="fas fa-globe"></i>
+              </div>
+              <h2 class="stat-number" data-target="45">0</h2>
+              <p class="stat-label">Countries Served</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-route me-2"></i>Simple Process</span>
+          <h2 class="fw-bold mb-2">How It Works</h2>
+          <p class="text-muted-custom">Getting started with TechWave is easy — just 4 simple steps</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="step-card" data-step="1">
+              <div class="step-number">01</div>
+              <div class="step-icon"><i class="fas fa-search"></i></div>
+              <h5 class="step-title">Browse & Choose</h5>
+              <p class="step-desc">Explore our wide range of premium tech products and find the perfect match for your
+                needs.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="step-card" data-step="2">
+              <div class="step-number">02</div>
+              <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
+              <h5 class="step-title">Add to Cart</h5>
+              <p class="step-desc">Select your preferred service plan and add products to your cart with confidence.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="step-card" data-step="3">
+              <div class="step-number">03</div>
+              <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+              <h5 class="step-title">Secure Checkout</h5>
+              <p class="step-desc">Complete your purchase with our secure payment gateway. Multiple payment options
+                available.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="step-card" data-step="4">
+              <div class="step-number">04</div>
+              <div class="step-icon"><i class="fas fa-truck"></i></div>
+              <h5 class="step-title">Fast Delivery</h5>
+              <p class="step-desc">Sit back and relax! Your product will be delivered to your doorstep within 48 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="step-connector-line d-none d-lg-block"></div>
+      </div>
+    </section>
+
+    <section class="services-section py-5" id="services-main">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-star me-2"></i>Core Services</span>
+          <h2 class="fw-bold mb-2">Why Choose TechWave Services</h2>
+          <p class="text-muted-custom">Complete solutions for all your technology needs</p>
+        </div>
+
+        <div class="row g-4 mb-5">
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card h-100">
+              <div class="service-icon"><i class="fas fa-truck"></i></div>
+              <h4 class="service-title">Fast Delivery</h4>
+              <p class="service-desc">Get your products within 48 hours with express delivery. Free shipping on orders
+                over $100.</p>
+              <ul class="service-list">
+                <li><i class="fas fa-check-circle"></i> 48 Hours Delivery</li>
+                <li><i class="fas fa-check-circle"></i> Real-time Tracking</li>
+                <li><i class="fas fa-check-circle"></i> Safe Packaging</li>
+                <li><i class="fas fa-check-circle"></i> Free Shipping >$100</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card h-100">
+              <div class="service-icon"><i class="fas fa-exchange-alt"></i></div>
+              <h4 class="service-title">1 Week Exchange</h4>
+              <p class="service-desc">Not satisfied? Exchange your product within 7 days with no questions asked.</p>
+              <ul class="service-list">
+                <li><i class="fas fa-check-circle"></i> 7 Days Exchange</li>
+                <li><i class="fas fa-check-circle"></i> No Questions Asked</li>
+                <li><i class="fas fa-check-circle"></i> Full Refund Option</li>
+                <li><i class="fas fa-check-circle"></i> Free Return Shipping</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card h-100">
+              <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+              <h4 class="service-title">5-10 Years Warranty</h4>
+              <p class="service-desc">Protect your investment with comprehensive warranty plans.</p>
+              <ul class="service-list">
+                <li><i class="fas fa-check-circle"></i> 5-10 Years Coverage</li>
+                <li><i class="fas fa-check-circle"></i> Free Repairs</li>
+                <li><i class="fas fa-check-circle"></i> 24/7 Support</li>
+                <li><i class="fas fa-check-circle"></i> No Hidden Charges</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="service-card h-100">
+              <div class="service-icon"><i class="fas fa-tools"></i></div>
+              <h4 class="service-title">Installation Support</h4>
+              <p class="service-desc">Professional installation by certified technicians with free training.</p>
+              <ul class="service-list">
+                <li><i class="fas fa-check-circle"></i> Professional Setup</li>
+                <li><i class="fas fa-check-circle"></i> Free Configuration</li>
+                <li><i class="fas fa-check-circle"></i> User Training</li>
+                <li><i class="fas fa-check-circle"></i> Maintenance Tips</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+          <div class="col-lg-6">
+            <div class="service-card-extended h-100">
+              <div class="service-icon-large"><i class="fas fa-headset"></i></div>
+              <h4 class="service-title">24/7 Customer Support</h4>
+              <p class="service-desc">Round-the-clock support through multiple channels. Our team is always ready to
+                help.</p>
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <span class="badge bg-purple"><i class="fas fa-phone"></i> Phone</span>
+                <span class="badge bg-purple"><i class="fas fa-envelope"></i> Email</span>
+                <span class="badge bg-blue"><i class="fas fa-comments"></i> Chat</span>
+                <span class="badge bg-blue"><i class="fas fa-video"></i> Video</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="service-card-extended h-100">
+              <div class="service-icon-large"><i class="fas fa-sync-alt"></i></div>
+              <h4 class="service-title">Maintenance & Updates</h4>
+              <p class="service-desc">Regular maintenance and software updates included with every purchase.</p>
+              <ul class="service-list mt-3">
+                <li><i class="fas fa-check"></i> Quarterly Checks</li>
+                <li><i class="fas fa-check"></i> Free Updates</li>
+                <li><i class="fas fa-check"></i> Performance Optimization</li>
+                <li><i class="fas fa-check"></i> Preventive Care</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-3">
+          <div class="col-lg-6">
+            <div class="service-card-extended h-100">
+              <div class="service-icon-large"><i class="fas fa-gift"></i></div>
+              <h4 class="service-title">Loyalty Rewards</h4>
+              <p class="service-desc">Earn points and redeem for exclusive discounts on every purchase.</p>
+              <div class="mt-3">
+                <div class="reward-tier">
+                  <span class="tier-name">Bronze</span>
+                  <small>5% Rewards</small>
+                </div>
+                <div class="reward-tier">
+                  <span class="tier-name">Silver</span>
+                  <small>10% Rewards</small>
+                </div>
+                <div class="reward-tier">
+                  <span class="tier-name">Gold</span>
+                  <small>15% Rewards</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="service-card-extended h-100">
+              <div class="service-icon-large"><i class="fas fa-recycle"></i></div>
+              <h4 class="service-title">Trade-In & Recycling</h4>
+              <p class="service-desc">Upgrade with trade-in. Up to 40% off on new purchases.</p>
+              <ul class="service-list mt-3">
+                <li><i class="fas fa-star"></i> 40% Off New Items</li>
+                <li><i class="fas fa-star"></i> Eco-Friendly Recycling</li>
+                <li><i class="fas fa-star"></i> Free Pickup Service</li>
+                <li><i class="fas fa-star"></i> Tax Deductible</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guarantee-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-award me-2"></i>Our Promise</span>
+          <h2 class="fw-bold mb-2">Service Guarantee</h2>
+          <p class="text-muted-custom">We stand behind every product and service we offer</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-medal"></i>
+              </div>
+              <h5>100% Quality Assured</h5>
+              <p>Every product passes through 50+ quality checkpoints before reaching you. We guarantee premium quality
+                or your money back.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-check-double me-1"></i> Certified Quality
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <h5>Secure Transactions</h5>
+              <p>256-bit SSL encryption protects your data. PCI-DSS compliant payment processing for complete peace of
+                mind.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-shield-alt me-1"></i> SSL Protected
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-undo-alt"></i>
+              </div>
+              <h5>Money-Back Guarantee</h5>
+              <p>Not satisfied with your purchase? Get a full refund within 30 days, no questions asked. Zero risk
+                shopping.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-hand-holding-usd me-1"></i> 30-Day Refund
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-shipping-fast"></i>
+              </div>
+              <h5>On-Time Delivery</h5>
+              <p>We guarantee delivery within the promised timeframe. If we're late, your next shipping is completely
+                free.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-clock me-1"></i> Always On Time
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <h5>Privacy Protection</h5>
+              <p>Your personal data is never shared or sold. GDPR compliant data handling with full transparency.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-eye-slash me-1"></i> GDPR Compliant
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="guarantee-card">
+              <div class="guarantee-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <h5>Eco-Friendly Commitment</h5>
+              <p>Carbon-neutral shipping and recyclable packaging. We plant a tree for every 100 orders placed.</p>
+              <div class="guarantee-badge">
+                <i class="fas fa-tree me-1"></i> Carbon Neutral
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-comparison py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-table me-2"></i>Compare Plans</span>
+          <h2 class="fw-bold mb-2">Service Comparison</h2>
+          <p class="text-muted-custom">Choose the plan that fits your needs</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Basic</th>
+                <th class="plan-popular">
+                  <span class="popular-tag">Most Popular</span>
+                  Standard
+                </th>
+                <th>Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Delivery Speed</td>
+                <td>5-7 Days</td>
+                <td>2-3 Days</td>
+                <td>24-48 Hours</td>
+              </tr>
+              <tr>
+                <td>Exchange Period</td>
+                <td>3 Days</td>
+                <td>7 Days</td>
+                <td>14 Days</td>
+              </tr>
+              <tr>
+                <td>Warranty</td>
+                <td>1 Year</td>
+                <td>5 Years</td>
+                <td>10 Years</td>
+              </tr>
+              <tr>
+                <td>Installation</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i></td>
+                <td><i class="fas fa-check text-success"></i></td>
+              </tr>
+              <tr>
+                <td>24/7 Support</td>
+                <td>Email</td>
+                <td>Email & Chat</td>
+                <td>Full Support</td>
+              </tr>
+              <tr>
+                <td>Maintenance</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i></td>
+                <td><i class="fas fa-check text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Priority Repairs</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i></td>
+              </tr>
+              <tr>
+                <td>Loyalty Rewards</td>
+                <td>Bronze (5%)</td>
+                <td>Silver (10%)</td>
+                <td>Gold (15%)</td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td class="price">Free</td>
+                <td class="price">$49/Year</td>
+                <td class="price">$99/Year</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><button class="btn btn-outline-light btn-sm plan-btn"
+                    onclick="subscribeToPlan('basic')">Current</button></td>
+                <td><button class="btn btn-primary btn-sm plan-btn"
+                    onclick="subscribeToPlan('standard')">Upgrade</button></td>
+                <td><button class="btn btn-outline-light btn-sm plan-btn"
+                    onclick="subscribeToPlan('premium')">Upgrade</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-quote-left me-2"></i>Reviews</span>
+          <h2 class="fw-bold mb-2">What Our Customers Say</h2>
+          <p class="text-muted-custom">Real reviews from real customers who love our services</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"The delivery was incredibly fast! I ordered my Smart TV on Monday and it
+                arrived Tuesday morning. The installation team was professional and set everything up perfectly."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>JD</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">James Davidson</h6>
+                  <p class="testimonial-role">Premium Plan Customer</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Purchased: 55" 4K Smart TV
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Had to exchange my coffee machine and the process was seamless. No questions
+                asked, free return shipping, and the replacement arrived within 2 days. Outstanding service!"</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>SM</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">Sarah Mitchell</h6>
+                  <p class="testimonial-role">Standard Plan Customer</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Purchased: Espresso Coffee Machine
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+              </div>
+              <p class="testimonial-text">"The 10-year warranty gave me total peace of mind. When my robot vacuum needed
+                repair after 3 years, they fixed it completely free and returned it within a week!"</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>RK</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">Robert Kim</h6>
+                  <p class="testimonial-role">Premium Plan Customer</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Purchased: Robot Vacuum X1
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"The loyalty rewards program is amazing! I've already saved over $200 with my
+                Gold tier status. Plus, the trade-in discount helped me upgrade my entire home setup."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>EP</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">Emily Parker</h6>
+                  <p class="testimonial-role">Gold Tier Member</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Multiple Purchases
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"24/7 support is a game-changer. I had a setup issue at 11 PM and the video
+                call support team helped me resolve it in 15 minutes. Absolutely incredible service!"</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>MC</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">Michael Chen</h6>
+                  <p class="testimonial-role">Premium Plan Customer</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Purchased: Smart Home Bundle
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"I love the eco-friendly approach! The recycling program made upgrading guilt-free, and the 40% trade-in discount was unbeatable. TechWave truly cares about the planet."</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">
+                  <span>LA</span>
+                </div>
+                <div>
+                  <h6 class="testimonial-name">Lisa Anderson</h6>
+                  <p class="testimonial-role">Standard Plan Customer</p>
+                </div>
+              </div>
+              <div class="testimonial-product">
+                <i class="fas fa-shopping-bag me-1"></i> Trade-In Program
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-history me-2"></i>Our Journey</span>
+          <h2 class="fw-bold mb-2">Service Excellence Timeline</h2>
+          <p class="text-muted-custom">How we've evolved to serve you better over the years</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2018</div>
+              <h5>Company Founded</h5>
+              <p>TechWave started with a simple mission: make technology accessible to everyone with unmatched customer
+                service.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2019</div>
+              <h5>24/7 Support Launched</h5>
+              <p>Introduced round-the-clock customer support across phone, email, and live chat channels.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2020</div>
+              <h5>Extended Warranty Program</h5>
+              <p>Launched our industry-leading 5-10 year warranty program covering repairs and replacements.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2021</div>
+              <h5>Global Expansion</h5>
+              <p>Expanded delivery to 45+ countries with express 48-hour shipping and real-time tracking.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2023</div>
+              <h5>Green Initiative</h5>
+              <p>Launched eco-friendly packaging, carbon-neutral shipping, and the trade-in recycling program.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2025</div>
+              <h5>AI-Powered Support</h5>
+              <p>Integrated AI diagnostics for instant troubleshooting and predictive maintenance alerts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-handshake me-2"></i>Partnerships</span>
+          <h2 class="fw-bold mb-2">Trusted & Certified</h2>
+          <p class="text-muted-custom">Industry certifications and partnerships that validate our commitment</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-certificate"></i>
+              <span>ISO 9001</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-shield-alt"></i>
+              <span>PCI DSS</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-leaf"></i>
+              <span>Energy Star</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-award"></i>
+              <span>BBB A+</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-check-circle"></i>
+              <span>TrustPilot</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4">
+            <div class="partner-card">
+              <i class="fas fa-globe-americas"></i>
+              <span>GDPR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section py-5" id="faq-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-question-circle me-2"></i>Help Center</span>
+          <h2 class="fw-bold mb-2">Frequently Asked Questions</h2>
+          <p class="text-muted-custom">Find quick answers to the most common questions about our services</p>
+        </div>
+
+        <div class="faq-tabs-wrapper mb-4">
+          <div class="faq-tabs" id="faqCategoryTabs">
+            <button class="faq-tab active" data-category="all">
+              <i class="fas fa-th-large me-2"></i>All
+            </button>
+            <button class="faq-tab" data-category="shipping">
+              <i class="fas fa-truck me-2"></i>Shipping
+            </button>
+            <button class="faq-tab" data-category="returns">
+              <i class="fas fa-undo me-2"></i>Returns
+            </button>
+            <button class="faq-tab" data-category="warranty">
+              <i class="fas fa-shield-alt me-2"></i>Warranty
+            </button>
+            <button class="faq-tab" data-category="payment">
+              <i class="fas fa-credit-card me-2"></i>Payment
+            </button>
+            <button class="faq-tab" data-category="account">
+              <i class="fas fa-user me-2"></i>Account
+            </button>
+          </div>
+        </div>
+
+        <div class="faq-search-wrapper mb-4">
+          <div class="faq-search">
+            <i class="fas fa-search faq-search-icon"></i>
+            <input type="text" id="faqSearchInput" placeholder="Search for answers..." class="faq-search-input">
+            <button class="faq-search-clear" id="faqSearchClear" style="display:none;">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="faq-no-results" id="faqNoResults" style="display:none;">
+          <i class="fas fa-search"></i>
+          <h5>No results found</h5>
+          <p>Try different keywords or browse all categories</p>
+        </div>
+
+        <div class="accordion" id="faqAccordion">
+
+          <div class="accordion-item faq-item" data-category="shipping">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq1">
+                <i class="fas fa-truck faq-icon me-3"></i>
+                How long does shipping take?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Shipping times depend on your service plan:</p>
+                <ul>
+                  <li><strong>Basic Plan:</strong> Standard shipping takes 5-7 business days.</li>
+                  <li><strong>Standard Plan:</strong> Express shipping delivers within 2-3 business days.</li>
+                  <li><strong>Premium Plan:</strong> Priority shipping arrives within 24-48 hours.</li>
+                </ul>
+                <p>All orders include real-time tracking so you can monitor your delivery every step of the way. Free
+                  shipping is available on all orders over $100.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="shipping">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq2">
+                <i class="fas fa-globe faq-icon me-3"></i>
+                Do you ship internationally?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Yes! We ship to <strong>45+ countries</strong> worldwide. International shipping typically takes 7-14
+                  business days depending on the destination. Premium plan members enjoy expedited international shipping
+                  within 5-7 business days.</p>
+                <p>Import duties and taxes may apply depending on your country's regulations. We provide all necessary
+                  customs documentation to ensure smooth delivery.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="shipping">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq3">
+                <i class="fas fa-map-marker-alt faq-icon me-3"></i>
+                How can I track my order?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Once your order ships, you'll receive a <strong>confirmation email</strong> with your tracking number
+                  and a direct link to track your package in real-time.</p>
+                <p>You can also track your order by:</p>
+                <ol>
+                  <li>Logging into your TechWave account</li>
+                  <li>Going to "My Orders" section</li>
+                  <li>Clicking the tracking number for live updates</li>
+                </ol>
+                <p>Our tracking system provides GPS-level accuracy with estimated delivery windows.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="returns">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq4">
+                <i class="fas fa-undo faq-icon me-3"></i>
+                What is your return policy?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>We offer a hassle-free return policy based on your service plan:</p>
+                <ul>
+                  <li><strong>Basic:</strong> 3-day exchange window</li>
+                  <li><strong>Standard:</strong> 7-day exchange with free return shipping</li>
+                  <li><strong>Premium:</strong> 14-day exchange with free return shipping and full refund option</li>
+                </ul>
+                <p>Items must be returned in their <strong>original packaging</strong> with all accessories included.
+                  Once we receive your return, refunds are processed within 3-5 business days.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="returns">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq5">
+                <i class="fas fa-exchange-alt faq-icon me-3"></i>
+                How do I initiate a return or exchange?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Initiating a return is simple:</p>
+                <ol>
+                  <li>Log into your TechWave account</li>
+                  <li>Navigate to "My Orders"</li>
+                  <li>Select the item you want to return</li>
+                  <li>Choose "Return" or "Exchange" and select a reason</li>
+                  <li>Print the prepaid return label</li>
+                  <li>Drop off at your nearest shipping partner location</li>
+                </ol>
+                <p>Alternatively, you can contact our 24/7 support team and they'll arrange a <strong>free pickup from
+                    your doorstep</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="returns">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq6">
+                <i class="fas fa-box-open faq-icon me-3"></i>
+                Can I return a product if the packaging is opened?
+              </button>
+            </h2>
+            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Yes, you can still return opened products within the exchange window of your plan. We understand you
+                  need to open and test the product. The product should be in <strong>working condition</strong> with all
+                  original accessories.</p>
+                <p>Note: Products with physical damage caused by misuse are not eligible for return but may be covered
+                  under your warranty plan.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="warranty">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq7">
+                <i class="fas fa-shield-alt faq-icon me-3"></i>
+                What does the warranty cover?
+              </button>
+            </h2>
+            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Our comprehensive warranty covers:</p>
+                <ul>
+                  <li><strong>Manufacturing defects</strong> — any defect in materials or workmanship</li>
+                  <li><strong>Component failures</strong> — internal hardware or electronic failures</li>
+                  <li><strong>Software issues</strong> — firmware bugs or software malfunctions</li>
+                  <li><strong>Battery degradation</strong> — below 80% capacity within warranty period</li>
+                </ul>
+                <p>The warranty does <strong>not</strong> cover damage from accidents, misuse, unauthorized
+                  modifications, or natural disasters.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="warranty">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq8">
+                <i class="fas fa-wrench faq-icon me-3"></i>
+                How do I claim warranty service?
+              </button>
+            </h2>
+            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>To claim warranty service:</p>
+                <ol>
+                  <li>Contact our support team via phone, chat, or email</li>
+                  <li>Provide your order number and describe the issue</li>
+                  <li>Our team will run remote diagnostics if possible</li>
+                  <li>If repair is needed, we'll arrange free pickup</li>
+                  <li>Repairs are typically completed within 5-10 business days</li>
+                  <li>If unrepairable, we'll provide a replacement</li>
+                </ol>
+                <p>Premium plan members get <strong>priority repair service</strong> with a loaner device while theirs is
+                  being repaired.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="warranty">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq9">
+                <i class="fas fa-plus-circle faq-icon me-3"></i>
+                Can I extend my warranty?
+              </button>
+            </h2>
+            <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Absolutely! You can extend your warranty at any time before the current warranty expires:</p>
+                <ul>
+                  <li><strong>+2 Years Extension:</strong> $29.99</li>
+                  <li><strong>+5 Years Extension:</strong> $59.99</li>
+                  <li><strong>Lifetime Protection:</strong> $99.99 (covers the entire product lifespan)</li>
+                </ul>
+                <p>Warranty extensions can be purchased through your account settings or by contacting our support team.
+                  Upgrading your service plan also automatically extends your warranty.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="payment">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq10">
+                <i class="fas fa-credit-card faq-icon me-3"></i>
+                What payment methods do you accept?
+              </button>
+            </h2>
+            <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>We accept a wide range of payment methods for your convenience:</p>
+                <ul>
+                  <li><strong>Credit/Debit Cards:</strong> Visa, Mastercard, American Express, Discover</li>
+                  <li><strong>Digital Wallets:</strong> PayPal, Apple Pay, Google Pay, Samsung Pay</li>
+                  <li><strong>Buy Now Pay Later:</strong> Afterpay, Klarna, Affirm (0% interest for 6 months)</li>
+                  <li><strong>Bank Transfer:</strong> Direct ACH transfer</li>
+                  <li><strong>Cryptocurrency:</strong> Bitcoin, Ethereum (via Coinbase Commerce)</li>
+                </ul>
+                <p>All payments are processed through our <strong>256-bit SSL encrypted</strong> and PCI-DSS compliant
+                  gateway.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="payment">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq11">
+                <i class="fas fa-money-bill-wave faq-icon me-3"></i>
+                Do you offer installment plans?
+              </button>
+            </h2>
+            <div id="faq11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Yes! We offer flexible installment plans for purchases over $100:</p>
+                <ul>
+                  <li><strong>3-Month Plan:</strong> 0% interest, split into 3 equal payments</li>
+                  <li><strong>6-Month Plan:</strong> 0% interest, split into 6 equal payments</li>
+                  <li><strong>12-Month Plan:</strong> Low 4.9% APR, split into 12 equal payments</li>
+                </ul>
+                <p>Installment plans are available through <strong>Afterpay, Klarna, and Affirm</strong>. Simply select
+                  your preferred option at checkout. No credit score impact for checking eligibility.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="payment">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq12">
+                <i class="fas fa-tags faq-icon me-3"></i>
+                How do discount codes and promotions work?
+              </button>
+            </h2>
+            <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>You can apply discount codes at checkout:</p>
+                <ol>
+                  <li>Add items to your cart</li>
+                  <li>Proceed to checkout</li>
+                  <li>Enter your promo code in the "Discount Code" field</li>
+                  <li>Click "Apply" to see your savings</li>
+                </ol>
+                <p><strong>Important notes:</strong></p>
+                <ul>
+                  <li>Only one discount code can be used per order</li>
+                  <li>Loyalty rewards points can be combined with discount codes</li>
+                  <li>Sale items may have limited promotional eligibility</li>
+                  <li>Subscribe to our newsletter for exclusive discount codes!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="account">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq13">
+                <i class="fas fa-user-plus faq-icon me-3"></i>
+                How do I create an account?
+              </button>
+            </h2>
+            <div id="faq13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Creating an account is quick and easy:</p>
+                <ol>
+                  <li>Click the <strong>Profile icon</strong> in the top navigation bar</li>
+                  <li>Click <strong>"Sign up"</strong> to switch to the registration form</li>
+                  <li>Enter your name, email, and create a password</li>
+                  <li>Click <strong>"Sign Up"</strong> to create your account</li>
+                </ol>
+                <p>You can also sign up during checkout. Your account gives you access to order tracking, wishlist,
+                  loyalty rewards, and personalized recommendations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="account">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq14">
+                <i class="fas fa-crown faq-icon me-3"></i>
+                How do I upgrade my service plan?
+              </button>
+            </h2>
+            <div id="faq14" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Upgrading your service plan is simple:</p>
+                <ol>
+                  <li>Go to the <strong>Service Comparison</strong> section on this page</li>
+                  <li>Review the features of each plan</li>
+                  <li>Click <strong>"Upgrade"</strong> on your preferred plan</li>
+                  <li>Complete the payment process</li>
+                </ol>
+                <p>When you upgrade mid-cycle, you'll be <strong>credited for the remaining time</strong> on your
+                  current plan. The upgrade takes effect immediately and applies to all your existing and future orders.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item faq-item" data-category="account">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#faq15">
+                <i class="fas fa-coins faq-icon me-3"></i>
+                How does the loyalty rewards program work?
+              </button>
+            </h2>
+            <div id="faq15" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                <p>Our loyalty program rewards you for every purchase:</p>
+                <ul>
+                  <li><strong>Bronze (Basic):</strong> Earn 5% back in reward points on every purchase</li>
+                  <li><strong>Silver (Standard):</strong> Earn 10% back plus exclusive member-only deals</li>
+                  <li><strong>Gold (Premium):</strong> Earn 15% back, exclusive deals, and early access to new products
+                  </li>
+                </ul>
+                <p><strong>How points work:</strong></p>
+                <ul>
+                  <li>100 points = $1 discount</li>
+                  <li>Points never expire as long as your account is active</li>
+                  <li>Redeem points at checkout or save them for bigger discounts</li>
+                  <li>Refer friends and earn 500 bonus points per referral!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="faq-contact-cta mt-5">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h4><i class="fas fa-comments me-2"></i>Still have questions?</h4>
+              <p>Can't find the answer you're looking for? Our support team is here to help 24/7.</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <a href="contact.html" class="btn btn-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Contact
+                Support</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter-section py-5">
+      <div class="container">
+        <div class="newsletter-card">
+          <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <div class="newsletter-content">
+                <h3><i class="fas fa-envelope-open-text me-2"></i>Stay Updated</h3>
+                <p>Subscribe to our newsletter for exclusive deals, service updates, and tech tips delivered straight to
+                  your inbox.</p>
+                <div class="newsletter-benefits">
+                  <span><i class="fas fa-check me-1"></i> Exclusive Discounts</span>
+                  <span><i class="fas fa-check me-1"></i> Early Access</span>
+                  <span><i class="fas fa-check me-1"></i> Tech Tips</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <form class="newsletter-form" id="serviceNewsletterForm">
+                <div class="newsletter-input-group">
+                  <input type="email" placeholder="Enter your email address" required class="newsletter-email-input">
+                  <button type="submit" class="btn btn-primary newsletter-submit-btn">
+                    <i class="fas fa-paper-plane me-2"></i>Subscribe
+                  </button>
+                </div>
+                <p class="newsletter-privacy"><i class="fas fa-lock me-1"></i> We respect your privacy. Unsubscribe
+                  anytime.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section py-5">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="fw-bold mb-3">Ready for Premium Services?</h2>
+          <p class="lead mb-4">Start shopping and enjoy exceptional service guarantee with every purchase</p>
+          <div class="cta-buttons">
+            <a href="product.html" class="btn btn-primary btn-lg me-3"><i class="fas fa-shopping-bag me-2"></i>Shop
+              Now</a>
+            <a href="contact.html" class="btn btn-outline-light btn-lg"><i class="fas fa-phone me-2"></i>Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container-fluid px-4">
+      <div class="footer-main py-5">
+        <div class="row g-5 mb-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-brand mb-4">
+              <div class="footer-logo mb-2">
+                <span class="brand-icon me-2"><i class="fas fa-bolt"></i></span>
+                TECH<span class="brand-wave">WAVE</span>
+              </div>
+              <p class="footer-tagline">Where technology feels at home. Discover the future of smart appliances.</p>
+            </div>
+            <div class="footer-features mt-4">
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Quality Guaranteed</span></div>
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Fast Delivery</span></div>
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Best Support</span></div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+             <h6 class="footer-heading"><i class="fas fa-link me-2"></i>Quick Links</h6>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="index.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                            <li><a href="product.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Products</a></li>
+                            <li><a href="about.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+                             <li><a href="contact.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>contact</a></li>
+                            <li><a href="services.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+                        </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Categories</h6>
+           <ul class="list-unstyled footer-links">
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Kitchen Appliances');return false;"><i class="fas fa-chevron-right me-2"></i>Kitchen</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Home Appliances');return false;"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Personal Care');return false;"><i class="fas fa-chevron-right me-2"></i>Personal Care</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Entertainment');return false;"><i class="fas fa-chevron-right me-2"></i>Entertainment</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Contact Info</h6>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt me-2" style="color:var(--accent-purple);"></i><span>123 Tech Street,
+                  Innovation City, IC 12345</span></p>
+              <p><i class="fas fa-phone me-2" style="color:var(--accent-purple);"></i><a href="tel:+11234567890"
+                  class="footer-link">+1 (123) 456-7890</a></p>
+              <p><i class="fas fa-fax me-2" style="color:var(--accent-purple);"></i><span>+1 (123) 456-7891</span></p>
+              <p class="mb-0"><i class="fas fa-envelope me-2" style="color:var(--accent-purple);"></i><a
+                  href="https://mail.google.com" class="footer-link">support@techwave.com</a></p>
+              <p class="small" style="color:var(--text-muted);margin-top:0.5rem;"><i class="fas fa-clock me-2"></i>Mon-Fri: 9AM-6PM | Sat-Sun: 10AM-5PM</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Connect With Us</h6>
+            <p class="footer-text mb-3">Follow us for latest updates and exclusive offers.</p>
+            <div class="social-links-footer mb-4">
+              <a href="https://facebook.com" target="_blank" class="social-link-footer" title="Facebook"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" class="social-link-footer" title="Twitter"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" class="social-link-footer" title="Instagram"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="social-link-footer" title="LinkedIn"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <a href="https://youtube.com" target="_blank" class="social-link-footer" title="YouTube"><i
+                  class="fab fa-youtube"></i></a>
+            </div>
+            <div class="newsletter-footer">
+              <form id="footerNewsletterForm" class="newsletter-form-footer">
+                <input type="email" placeholder="Your email" class="newsletter-input-footer" required>
+                <button type="submit" class="btn btn-primary btn-sm w-100"><i
+                    class="fas fa-envelope me-1"></i>Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom py-3">
+          <div class="row align-items-center g-3">
+            <div class="col-md-4 text-center text-md-start">
+              <p class="footer-copy mb-0">&copy; 2025 TechWave. All rights reserved.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-amex"></i>
+              </div>
+            </div>
+            <div class="col-md-4 text-center text-md-end">
+              <a href="#" class="footer-link-small me-3">Privacy Policy</a>
+              <a href="#" class="footer-link-small me-3">Terms of Service</a>
+              <a href="#" class="footer-link-small">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});" title="Back to top">
+          <i class="fas fa-arrow-up"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="services.js"></script>
+  <script src="shared.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

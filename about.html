@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About TechWave - Our Mission, Vision & Team">
+    <title>About Us | TechWave - Where Technology Meets Innovation</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="about.css">
+</head>
+<body>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="glow-bg"></div>
+  <div class="toast-container" id="toastContainer"></div>
+  
+
+  <canvas id="particleCanvas"></canvas>
+<div class="glow-bg"></div>
+<div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+
+<div class="top-bar">
+    <div class="container-fluid px-4">
+        <div class="top-bar-inner">
+            <div class="top-bar-left">
+                <span><i class="fas fa-shipping-fast me-1"></i> Free shipping on orders $100+</span>
+                <span class="top-bar-divider">|</span>
+                <span><i class="fas fa-headset me-1"></i> 24/7 Support</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="top-bar-timer">
+                    <i class="fas fa-bolt me-1"></i> Flash Sale ends in:
+                    <strong id="countdownTimer">00:00:00</strong>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNavbar">
+    <div class="container-fluid px-4">
+       <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+            <img src="logo and bg imagies/t7kWXK7Wj.jpg" alt="TechWave Logo" class="navbar-logo me-2">
+            TECH<span class="brand-wave">WAVE</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto nav-spacing">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-2"></i>Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html"><i class="fas fa-cube me-2"></i>Products</a></li>
+                <li class="nav-item"><a class="nav-link active" href="about.html"><i class="fas fa-info-circle me-2"></i>About</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-2"></i>Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="services.html"><i class="fas fa-cogs me-2"></i>Services</a></li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2 flex-wrap navbar-right-section">
+                <form class="d-flex search-form-enhanced position-relative" id="searchForm" 
+      onsubmit="return false;" action="javascript:void(0);">
+    <div class="search-wrapper-enhanced">
+        <input class="form-control search-input-enhanced" type="search" 
+               id="searchInput" placeholder="Search products..." 
+               aria-label="Search" autocomplete="off">
+        <div class="search-suggestions" id="searchSuggestions" 
+             style="display:none;"></div>
+        <button class="btn btn-search-enhanced" type="button">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
+
+                <div class="nav-icons-group">
+                    <button class="btn btn-primary profile-nav-btn" data-bs-toggle="modal" data-bs-target="#profileModal" title="Profile">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom border-secondary">
+        <h5 class="modal-title" id="profileModalLabel"><i class="fas fa-user-circle me-2"></i>My Account</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <ul class="nav nav-tabs nav-tabs-custom justify-content-center" id="profileTabs" role="tablist">
+          <li class="nav-item" role="presentation" id="loginTabItem">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="tab"
+                    data-bs-target="#loginPane" type="button" role="tab" aria-selected="true">
+              <i class="fas fa-sign-in-alt me-2"></i>Login
+            </button>
+          </li>
+          <li class="nav-item" role="presentation" id="profileDataTabItem" style="display:none;">
+            <button class="nav-link" id="profile-data-tab" data-bs-toggle="tab"
+                    data-bs-target="#profilePane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-user me-2"></i>Profile
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cart-tab" data-bs-toggle="tab"
+                    data-bs-target="#cartPane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-shopping-cart me-2"></i>Cart <span id="cartTabCount"></span>
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="wishlist-tab" data-bs-toggle="tab"
+                    data-bs-target="#wishlistPane" type="button" role="tab" aria-selected="false">
+              <i class="fas fa-heart me-2"></i>Wishlist <span id="wishlistTabCount"></span>
+            </button>
+          </li>
+        </ul>
+        
+        <div class="tab-content" id="profileTabContent">
+          <div class="tab-pane fade show active" id="loginPane" role="tabpanel">
+            <div class="auth-container">
+              <div class="auth-forms-wrapper">
+                
+                <div class="auth-form-container" id="loginFormContainer">
+                  <div class="auth-header">
+                    <div class="auth-icon">
+                      <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Welcome Back!</h3>
+                    <p>Sign in to continue to TechWave</p>
+                  </div>
+
+                  <div class="social-login">
+                    <button type="button" class="btn-social btn-google" onclick="socialLogin('google')">
+                      <i class="fab fa-google"></i>
+                      <span>Google</span>
+                    </button>
+                    <button type="button" class="btn-social btn-facebook" onclick="socialLogin('facebook')">
+                      <i class="fab fa-facebook-f"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button type="button" class="btn-social btn-apple" onclick="socialLogin('apple')">
+                      <i class="fab fa-apple"></i>
+                      <span>Apple</span>
+                    </button>
+                  </div>
+
+                  <div class="auth-divider">
+                    <span>or continue with email</span>
+                  </div>
+
+                  <form id="loginForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="loginEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="loginEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="loginPassword"
+                               placeholder="Password" required minlength="4" autocomplete="current-password">
+                        <label for="loginPassword">Password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('loginPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Password is required.</div>
+                    </div>
+
+                    <div class="auth-options">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Remember me</span>
+                      </label>
+                      <a href="#" class="forgot-link" onclick="showForgotPassword();return false;">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Sign In</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-arrow-right btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Don't have an account? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('signup');return false;">
+                        Create one <i class="fas fa-arrow-right ms-1"></i>
+                      </a>
+                    </p>
+                  </div>
+
+                  <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Protected by 256-bit SSL encryption</span>
+                  </div>
+                </div>
+
+                <div class="auth-form-container" id="signupFormContainer" style="display:none;">
+                  <div class="auth-header">
+                    <div class="auth-icon signup-icon">
+                      <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Create Account</h3>
+                    <p>Join TechWave and start shopping</p>
+                  </div>
+
+                  <div class="social-login">
+                    <button type="button" class="btn-social btn-google" onclick="socialLogin('google')">
+                      <i class="fab fa-google"></i>
+                      <span>Google</span>
+                    </button>
+                    <button type="button" class="btn-social btn-facebook" onclick="socialLogin('facebook')">
+                      <i class="fab fa-facebook-f"></i>
+                      <span>Facebook</span>
+                    </button>
+                    <button type="button" class="btn-social btn-apple" onclick="socialLogin('apple')">
+                      <i class="fab fa-apple"></i>
+                      <span>Apple</span>
+                    </button>
+                  </div>
+
+                  <div class="auth-divider">
+                    <span>or register with email</span>
+                  </div>
+
+                  <form id="signupForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" class="form-control auth-input" id="signupName"
+                               placeholder="Full name" required minlength="2" autocomplete="name">
+                        <label for="signupName">Full name</label>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback">Name must be at least 2 characters.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="signupEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="signupEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="signupPassword"
+                               placeholder="Password" required minlength="6" autocomplete="new-password">
+                        <label for="signupPassword">Password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('signupPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="password-strength-container" id="passwordStrengthContainer">
+                        <div class="password-strength-bar">
+                          <div class="password-strength-fill" id="passwordStrengthFill"></div>
+                        </div>
+                        <div class="password-strength-text">
+                          <span id="passwordStrengthText">Password strength</span>
+                          <span id="passwordStrengthLabel"></span>
+                        </div>
+                        <div class="password-requirements">
+                          <div class="requirement" id="req-length">
+                            <i class="fas fa-circle"></i> At least 6 characters
+                          </div>
+                          <div class="requirement" id="req-upper">
+                            <i class="fas fa-circle"></i> One uppercase letter
+                          </div>
+                          <div class="requirement" id="req-number">
+                            <i class="fas fa-circle"></i> One number
+                          </div>
+                          <div class="requirement" id="req-special">
+                            <i class="fas fa-circle"></i> One special character
+                          </div>
+                        </div>
+                      </div>
+                      <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                    </div>
+
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" class="form-control auth-input" id="signupConfirmPassword"
+                               placeholder="Confirm password" required autocomplete="new-password">
+                        <label for="signupConfirmPassword">Confirm password</label>
+                        <button type="button" class="btn-toggle-password" onclick="togglePassword('signupConfirmPassword', this)">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <div class="input-focus-effect"></div>
+                        <div class="input-success-icon"><i class="fas fa-check-circle"></i></div>
+                      </div>
+                      <div class="invalid-feedback" id="confirmPasswordFeedback">Passwords do not match.</div>
+                    </div>
+
+                    <div class="auth-options">
+                      <label class="custom-checkbox">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">I agree to the <a href="#" onclick="showToast('Terms page coming soon!','info');return false;">Terms of Service</a> and <a href="#" onclick="showToast('Privacy page coming soon!','info');return false;">Privacy Policy</a></span>
+                      </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Create Account</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-arrow-right btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Already have an account? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('login');return false;">
+                        Sign in <i class="fas fa-arrow-right ms-1"></i>
+                      </a>
+                    </p>
+                  </div>
+
+                  <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Your data is protected & secure</span>
+                  </div>
+                </div>
+
+                <div class="auth-form-container" id="forgotPasswordContainer" style="display:none;">
+                  <div class="auth-header">
+                    <div class="auth-icon forgot-icon">
+                      <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Forgot Password?</h3>
+                    <p>No worries! Enter your email and we'll send you reset instructions.</p>
+                  </div>
+
+                  <form id="forgotPasswordForm" class="auth-form" novalidate>
+                    <div class="form-floating-custom">
+                      <div class="input-icon-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" class="form-control auth-input" id="forgotEmail"
+                               placeholder="Email address" required autocomplete="email">
+                        <label for="forgotEmail">Email address</label>
+                        <div class="input-focus-effect"></div>
+                      </div>
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-auth btn-primary">
+                      <span class="btn-text">Send Reset Link</span>
+                      <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                      <i class="fas fa-paper-plane btn-arrow"></i>
+                    </button>
+                  </form>
+
+                  <div class="auth-footer">
+                    <p>Remember your password? 
+                      <a href="#" class="auth-switch-link" onclick="switchAuthForm('login');return false;">
+                        <i class="fas fa-arrow-left me-1"></i> Back to login
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="profilePane" role="tabpanel">
+            <div id="profileInfo" class="p-4">
+              <p class="text-secondary text-center py-4">Please login to view your profile.</p>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="cartPane" role="tabpanel">
+            <div class="p-4">
+              <div id="cartContent">
+                <div class="empty-state">
+                  <div class="empty-state-icon"><i class="fas fa-shopping-cart"></i></div>
+                  <h5>Your cart is empty</h5>
+                  <p>Browse products and add items!</p>
+                </div>
+              </div>
+              <div id="cartTotal" style="display:none;" class="mt-3 pt-3 border-top border-secondary">
+                <div class="checkout-summary">
+                  <div class="checkout-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+                  <div class="checkout-row"><span>Shipping</span><span id="cartShipping">Free</span></div>
+                  <div class="checkout-row"><span>Tax (8%)</span><span id="cartTax">$0.00</span></div>
+                  <div class="checkout-row total"><span>Total</span><span class="checkout-val" id="cartTotalAmount">$0.00</span></div>
+                </div>
+                <button class="btn btn-primary w-100 mb-2" id="checkoutBtn" onclick="processCheckout()">
+                  <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                </button>
+                <button class="btn btn-outline-danger w-100 btn-sm" onclick="clearCart()">
+                  <i class="fas fa-trash-alt me-2"></i>Clear Cart
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="wishlistPane" role="tabpanel">
+            <div class="p-4">
+              <div id="wishlistContent">
+                <div class="empty-state">
+                  <div class="empty-state-icon"><i class="fas fa-heart"></i></div>
+                  <h5>Your wishlist is empty</h5>
+                  <p>Click the ♥ on products you love!</p>
+                </div>
+              </div>
+              <div id="wishlistActions" style="display:none;" class="mt-3 pt-3 border-top border-secondary">
+                <button class="btn btn-primary w-100 mb-2" onclick="addAllWishlistToCart()">
+                  <i class="fas fa-cart-plus me-2"></i>Add All to Cart
+                </button>
+                <button class="btn btn-outline-danger w-100 btn-sm" onclick="clearWishlist()">
+                  <i class="fas fa-trash-alt me-2"></i>Clear Wishlist
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <section class="about-hero py-5">
+        <div class="container">
+            <div class="row align-items-center min-vh-50">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="section-badge">About TechWave</span>
+                    <h1 class="display-4 fw-bold mt-3 mb-4">
+                        Innovating the Future of<br>
+                        <span class="gradient-text">Smart Living</span>
+                    </h1>
+                    <p class="lead text-secondary mb-4">
+                        At TechWave, we believe technology should simplify life, not complicate it. Since our founding, we've been committed to creating innovative, user-friendly smart appliances that seamlessly integrate into modern homes.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="product.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-cube me-2"></i>Explore Products
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-envelope me-2"></i>Get in Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-hero-image">
+                        <i class="fas fa-lightbulb-on"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="mvv-section py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="fw-bold mb-2">Our Core Values</h2>
+                    <p class="text-secondary">The principles that drive everything we do</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="mvv-card">
+                            <div class="mvv-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Our Mission</h5>
+                            <p class="text-secondary">
+                                To empower households with intelligent, sustainable appliances that enhance daily life through cutting-edge innovation and intuitive design.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="mvv-card featured">
+                            <div class="mvv-icon featured-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Our Vision</h5>
+                            <p class="text-secondary">
+                                A world where technology seamlessly integrates into every home, making life more convenient, efficient, and enjoyable for everyone.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="mvv-card">
+                            <div class="mvv-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="fw-bold mb-3">Our Values</h5>
+                            <p class="text-secondary">
+                                Innovation, quality, sustainability, and customer-centricity guide every decision we make and product we create.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section py-5">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <div class="story-content">
+                            <span class="section-badge">Our Story</span>
+                            <h2 class="fw-bold mt-3 mb-3">From Dream to Reality</h2>
+                            <p class="text-secondary mb-3">
+                                TechWave was founded in 2015 by a team of engineers and designers with a shared vision: to revolutionize how people interact with home appliances. What started in a small garage has grown into a leading innovator in smart home technology.
+                            </p>
+                            <p class="text-secondary mb-3">
+                                Over the years, we've expanded our product line from smart kitchen appliances to a comprehensive ecosystem of connected devices. Our commitment to excellence and customer satisfaction has earned us the trust of millions worldwide.
+                            </p>
+                            <p class="text-secondary">
+                                Today, TechWave continues to push the boundaries of innovation, creating products that don't just meet customer expectations—they exceed them.
+                            </p>
+                            <div class="story-stats mt-4">
+                                <div class="stat">
+                                    <div class="stat-number">150,000+</div>
+                                    <div class="stat-label">Happy Users</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">50000+</div>
+                                    <div class="stat-label">Products</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">10+</div>
+                                    <div class="stat-label">Years</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="story-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section class="team-section py-5" id="team">
+  <div class="container">
+    <div class="section-header text-center mb-5">
+      <span class="section-badge"><i class="fas fa-users me-1"></i> Our People</span>
+      <h2 class="fw-bold mt-2 mb-2">Meet Our Team</h2>
+      <p class="text-muted">The brilliant minds behind TechWave innovation</p>
+    </div>
+
+    <div class="team-grid-container">
+      <div class="team-member-card team-leader-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar leader-avatar">
+          <i class="fas fa-user-tie"></i>
+          <div class="avatar-ring"></div>
+          <div class="leader-crown"><i class="fas fa-crown"></i></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">Saad Jawaid</h4>
+          <span class="member-role leader-role">Team Leader</span>
+          <p class="member-desc">Full-stack development and project coordination</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+
+      <div class="team-member-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">Anus</h4>
+          <span class="member-role">Frontend Developer</span>
+          <p class="member-desc">Frontend design and development</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+
+      <div class="team-member-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">Shayan Khan</h4>
+          <span class="member-role">CSS Specialist</span>
+          <p class="member-desc">CSS styling & layout design</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+
+      <div class="team-member-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">Hafiz Muhammad Asad</h4>
+          <span class="member-role">JavaScript Developer</span>
+          <p class="member-desc">JavaScript functionality & interactions</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+
+      <div class="team-member-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">S M Aariz Iqbal Hussain</h4>
+          <span class="member-role">Structure Developer</span>
+          <p class="member-desc">Page structure & sections</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+
+      <div class="team-member-card animate-slide-up">
+        <div class="card-glow"></div>
+        <div class="card-border"></div>
+        <div class="member-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="member-content">
+          <h4 class="member-name">Muhammad Hassan</h4>
+          <span class="member-role">Team Member</span>
+          <p class="member-desc">Development support & assistance</p>
+          <div class="member-socials">
+            <a href="#" onclick="showToast('LinkedIn coming soon!','info');return false;"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" onclick="showToast('GitHub coming soon!','info');return false;"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="card-shine"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+       <section class="timeline-section py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-badge"><i class="fas fa-history me-2"></i>Our Journey</span>
+          <h2 class="fw-bold mb-2">Service Excellence Timeline</h2>
+          <p class="text-muted-custom">How we've evolved to serve you better over the years</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2018</div>
+              <h5>Company Founded</h5>
+              <p>TechWave started with a simple mission: make technology accessible to everyone with unmatched customer
+                service.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2019</div>
+              <h5>24/7 Support Launched</h5>
+              <p>Introduced round-the-clock customer support across phone, email, and live chat channels.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2020</div>
+              <h5>Extended Warranty Program</h5>
+              <p>Launched our industry-leading 5-10 year warranty program covering repairs and replacements.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2021</div>
+              <h5>Global Expansion</h5>
+              <p>Expanded delivery to 45+ countries with express 48-hour shipping and real-time tracking.</p>
+            </div>
+          </div>
+          <div class="timeline-item left">
+            <div class="timeline-content">
+              <div class="timeline-year">2023</div>
+              <h5>Green Initiative</h5>
+              <p>Launched eco-friendly packaging, carbon-neutral shipping, and the trade-in recycling program.</p>
+            </div>
+          </div>
+          <div class="timeline-item right">
+            <div class="timeline-content">
+              <div class="timeline-year">2025</div>
+              <h5>AI-Powered Support</h5>
+              <p>Integrated AI diagnostics for instant troubleshooting and predictive maintenance alerts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <section class="why-choose-us py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="fw-bold mb-2">Why Choose TechWave?</h2>
+                    <p class="text-secondary">What sets us apart from the competition</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="0">
+                        <div class="why-card">
+                            <div class="why-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2">Innovation</h5>
+                            <p class="text-secondary">Constantly pushing boundaries with cutting-edge technology</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="why-card">
+                            <div class="why-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2">Sustainability</h5>
+                            <p class="text-secondary">Eco-friendly products designed for a better future</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="why-card">
+                            <div class="why-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2">Customer First</h5>
+                            <p class="text-secondary">Your satisfaction is our top priority</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="why-card">
+                            <div class="why-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5 class="fw-bold mb-2">Quality</h5>
+                            <p class="text-secondary">Premium products backed by comprehensive warranties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="awards-section py-5">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <h2 class="fw-bold mb-2">Awards & Recognition</h2>
+                    <p class="text-secondary">Industry recognition of our excellence</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="0">
+                        <div class="award-card">
+                            <div class="award-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h5 class="fw-bold">Best Innovation</h5>
+                            <p class="text-secondary small">TechWave Innovation Awards 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="award-card">
+                            <div class="award-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h5 class="fw-bold">Customer Choice</h5>
+                            <p class="text-secondary small">Global Tech Review 2024</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="award-card">
+                            <div class="award-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h5 class="fw-bold">Sustainability Leader</h5>
+                            <p class="text-secondary small">Green Tech Alliance 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-about py-5">
+            <div class="container">
+                <div class="newsletter-card text-center">
+                    <h2 class="fw-bold mb-3">Stay Connected</h2>
+                    <p class="mb-4">Subscribe to get updates on new products and company news</p>
+                    <form class="newsletter-form-about" id="aboutNewsletterForm">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   
+  <footer class="footer">
+    <div class="container-fluid px-4">
+      <div class="footer-main py-5">
+        <div class="row g-5 mb-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-brand mb-4">
+              <div class="footer-logo mb-2">
+                <span class="brand-icon me-2"><i class="fas fa-bolt"></i></span>
+                TECH<span class="brand-wave">WAVE</span>
+              </div>
+              <p class="footer-tagline">Where technology feels at home. Discover the future of smart appliances.</p>
+            </div>
+            <div class="footer-features mt-4">
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Quality Guaranteed</span></div>
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Fast Delivery</span></div>
+              <div class="footer-feature-item"><i class="fas fa-check-circle me-2"
+                  style="color:var(--accent-purple);"></i><span>Best Support</span></div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+             <h6 class="footer-heading"><i class="fas fa-link me-2"></i>Quick Links</h6>
+                        <ul class="list-unstyled footer-links">
+                            <li><a href="index.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                            <li><a href="product.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Products</a></li>
+                            <li><a href="about.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+                             <li><a href="contact.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>contact</a></li>
+                            <li><a href="services.html" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+                        </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Categories</h6>
+           <ul class="list-unstyled footer-links">
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Kitchen Appliances');return false;"><i class="fas fa-chevron-right me-2"></i>Kitchen</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Home Appliances');return false;"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Personal Care');return false;"><i class="fas fa-chevron-right me-2"></i>Personal Care</a></li>
+              <li><a href="#" class="footer-link" onclick="scrollToAndFilter('Entertainment');return false;"><i class="fas fa-chevron-right me-2"></i>Entertainment</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Contact Info</h6>
+            <div class="footer-contact">
+              <p><i class="fas fa-map-marker-alt me-2" style="color:var(--accent-purple);"></i><span>123 Tech Street,
+                  Innovation City, IC 12345</span></p>
+              <p><i class="fas fa-phone me-2" style="color:var(--accent-purple);"></i><a href="tel:+11234567890"
+                  class="footer-link">+1 (123) 456-7890</a></p>
+              <p><i class="fas fa-fax me-2" style="color:var(--accent-purple);"></i><span>+1 (123) 456-7891</span></p>
+              <p class="mb-0"><i class="fas fa-envelope me-2" style="color:var(--accent-purple);"></i><a
+                  href="https://mail.google.com" class="footer-link">support@techwave.com</a></p>
+              <p class="small" style="color:var(--text-muted);margin-top:0.5rem;"><i class="fas fa-clock me-2"></i>Mon-Fri: 9AM-6PM | Sat-Sun: 10AM-5PM</p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 class="footer-heading">Connect With Us</h6>
+            <p class="footer-text mb-3">Follow us for latest updates and exclusive offers.</p>
+            <div class="social-links-footer mb-4">
+              <a href="https://facebook.com" target="_blank" class="social-link-footer" title="Facebook"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" class="social-link-footer" title="Twitter"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" class="social-link-footer" title="Instagram"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="https://linkedin.com" target="_blank" class="social-link-footer" title="LinkedIn"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <a href="https://youtube.com" target="_blank" class="social-link-footer" title="YouTube"><i
+                  class="fab fa-youtube"></i></a>
+            </div>
+            <div class="newsletter-footer">
+              <form id="footerNewsletterForm" class="newsletter-form-footer">
+                <input type="email" placeholder="Your email" class="newsletter-input-footer" required>
+                <button type="submit" class="btn btn-primary btn-sm w-100"><i
+                    class="fas fa-envelope me-1"></i>Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="footer-bottom py-3">
+          <div class="row align-items-center g-3">
+            <div class="col-md-4 text-center text-md-start">
+              <p class="footer-copy mb-0">&copy; 2025 TechWave. All rights reserved.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fab fa-cc-amex"></i>
+              </div>
+            </div>
+            <div class="col-md-4 text-center text-md-end">
+              <a href="#" class="footer-link-small me-3">Privacy Policy</a>
+              <a href="#" class="footer-link-small me-3">Terms of Service</a>
+              <a href="#" class="footer-link-small">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});" title="Back to top">
+          <i class="fas fa-arrow-up"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <div class="scroll-to-top" id="scrollTopBtn" title="Back to top" role="button" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+    <svg class="scroll-progress-ring" width="52" height="52">
+      <circle cx="26" cy="26" r="23" fill="none" stroke="rgba(138,43,226,0.3)" stroke-width="2"></circle>
+      <circle cx="26" cy="26" r="23" fill="none" stroke="#8a2be2" stroke-width="2"
+              stroke-dasharray="144.51" stroke-dashoffset="144.51" id="scrollProgressCircle"
+              style="transform:rotate(-90deg);transform-origin:center;"></circle>
+    </svg>
+  </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ <script src="shared.js"></script>              
+<script src="about.js"></script>         
+<script src="script.js"></script>   
+</body>
+</html>
